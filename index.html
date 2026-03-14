@@ -21,6 +21,7 @@
 </div>
 
 <script>
+
 const input = document.getElementById("url");
 
 input.addEventListener("keydown", function(event) {
@@ -30,16 +31,33 @@ input.addEventListener("keydown", function(event) {
 });
 
 function go() {
-    let url = document.getElementById("url").value.trim();
 
-    if (!url) return;
+    let query = input.value.trim();
 
-    if (!url.startsWith("http://") && !url.startsWith("https://")) {
-        url = "https://" + url;
+    if (!query) return;
+
+    let url;
+
+    if (query.includes(".") || query.startsWith("http")) {
+
+        if (!query.startsWith("http")) {
+            query = "https://" + query;
+        }
+
+        url = query;
+
+    } else {
+
+        url = "https://www.google.com/search?q=" + encodeURIComponent(query);
+
     }
 
-    window.location.href = "/api/browser?url=" + btoa(url);
+    const encoded = btoa(url);
+
+    window.location.href = "/api/browser/" + encoded;
+
 }
+
 </script>
 
 </body>
