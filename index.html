@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Viola</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+
+<div class="top">
+    <img src="/viola-logo-Picsart-BackgroundRemover.jpg" class="logo" alt="Viola Logo">
+    <h1>VIOLA</h1>
+</div>
+
+<div class="bottom">
+    <input id="url" type="text" placeholder="*ENTER URL HERE*">
+    <button onclick="go()">Search</button>
+</div>
+
+<script>
+const input = document.getElementById("url");
+
+input.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        go();
+    }
+});
+
+function go() {
+    let url = document.getElementById("url").value.trim();
+
+    if (!url) return;
+
+    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+        url = "https://" + url;
+    }
+
+    window.location.href = "/browser?url=" + btoa(url);
+}
+</script>
+
+</body>
+</html>
