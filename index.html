@@ -6,55 +6,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="stylesheet" href="/styles.css">
+
 </head>
 
 <body>
 
 <div class="top">
-    <img src="/viola-logo-Picsart-BackgroundRemover.jpg" class="logo" alt="Viola Logo">
-    <h1>VIOLA</h1>
+<img src="/viola-logo.jpg" class="logo">
+<h1>VIOLA</h1>
 </div>
 
 <div class="bottom">
-    <input id="url" type="text" placeholder="*ENTER URL HERE*">
-    <button onclick="go()">Search</button>
+<input id="url" type="text" placeholder="Search or enter a URL">
+<button onclick="go()">Go</button>
 </div>
 
 <script>
 
 const input = document.getElementById("url");
 
-input.addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-        go();
-    }
+input.addEventListener("keydown", function(e) {
+  if (e.key === "Enter") {
+    go();
+  }
 });
 
 function go() {
 
-    let query = input.value.trim();
+  let query = input.value.trim();
 
-    if (!query) return;
+  if (!query) return;
 
-    let url;
+  let url;
 
-    if (query.includes(".") || query.startsWith("http")) {
+  if (query.includes(".") || query.startsWith("http")) {
 
-        if (!query.startsWith("http")) {
-            query = "https://" + query;
-        }
-
-        url = query;
-
-    } else {
-
-        url = "https://www.google.com/search?q=" + encodeURIComponent(query);
-
+    if (!query.startsWith("http")) {
+      query = "https://" + query;
     }
 
-    const encoded = btoa(url);
+    url = query;
 
-    window.location.href = "/api/browser/" + encoded;
+  } else {
+
+    url = "https://www.google.com/search?q=" + encodeURIComponent(query);
+
+  }
+
+  const encoded = btoa(url);
+
+  window.location.href = "/api/browser/" + encoded;
 
 }
 
